@@ -7,7 +7,26 @@
 </head>
 <body>
     <%- include('./partials/navbar') %>
-    
+
     <h1>Add a Book</h1>
+
+    <form action="/library" method="post">
+        <label for="title">Title:</label>
+        <input name="title" id="title" type="text">
+
+        <label for="author">Author:</label>
+        <input name="author" id="author" type="text">
+
+        <label for="genre">Genre:</label>
+        <input name="genre" id="genre" type="text">
+
+        <label for="coverImg">Cover:</label>
+        <input name="coverImg" id="coverImg" type="text">
+
+        <label for="publicationYear">Publication Year:</label>
+        <input name="publicationYear" id="publicationYear" type="number">
+
+        <button>Add Book</button>
+    </form>
 </body>
 </html>
