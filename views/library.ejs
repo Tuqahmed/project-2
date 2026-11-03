@@ -7,7 +7,12 @@
 </head>
 <body>
     <%- include('./partials/navbar') %>
-    
+
     <h1>The Library</h1>
+
+    <% for(let oneBook of books){ %>
+        <a href="/library/<%= oneBook._id %>"><%= oneBook.title %> by <%= oneBook.author.name%></a>
+        <img src="<%= oneBook.coverImg %>" alt="<%= oneBook.title %>">
+    <% } %>
 </body>
 </html>

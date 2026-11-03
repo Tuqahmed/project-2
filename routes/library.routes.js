@@ -5,7 +5,7 @@ const Author = require('../models/Author')
 const Genre = require('../models/Genre')
 
 router.get('/', async (req,res)=>{
-    const allBooks = await Book.find().populate('owner')
+    const allBooks = await Book.find().populate('owner author')
     res.render('library.ejs', {books: allBooks})
 })
 
