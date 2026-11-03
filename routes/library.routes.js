@@ -37,7 +37,7 @@ router.get('/:bookId', async (req,res)=>{
 })
 
 router.get('/:bookId/edit', isSignedIn, async (req,res)=>{
-    const foundBook = await Book.findById(req.params.bookId)
+    const foundBook = await Book.findById(req.params.bookId).populate('owner author genre')
     res.render('edit-book.ejs', {book: foundBook})
 })
 
