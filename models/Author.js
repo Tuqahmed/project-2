@@ -5,10 +5,6 @@ const authorSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-    nationality: {
-        type: String,
-        trim: true
     }
 }, {timestamps: true})
 
