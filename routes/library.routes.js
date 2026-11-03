@@ -4,8 +4,9 @@ const router = require('express').Router()
 const Author = require('../models/Author')
 const Genre = require('../models/Genre')
 
-router.get('/', (req,res)=>{
-    res.render('library.ejs')
+router.get('/', async (req,res)=>{
+    const allBooks = await Book.find().populate('owner')
+    res.render('library.ejs', {books: allBooks})
 })
 
 router.get('/new',isSignedIn, (req,res)=>{
