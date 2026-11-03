@@ -16,9 +16,7 @@
     <p>Book registered by <%= book.owner.username %></p>
 
     <% if(book.owner._id.equals(user._id)){ %>
-        <form action="/library/<%= book._id %>/edit" method="post">
-            <button>Edit Book</button>
-        </form>
+        <a href="/library/<%= book._id %>/edit">Edit Book</a>
 
         <form action="/library/<%= book._id %>?_method=DELETE" method="post">
             <button>Delete Book</button>

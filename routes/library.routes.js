@@ -36,4 +36,9 @@ router.get('/:bookId', async (req,res)=>{
     res.render('book-details.ejs', {book: foundBook})
 })
 
+router.get('/:bookId/edit', isSignedIn, async (req,res)=>{
+    const foundBook = await Book.findById(req.params.bookId)
+    res.render('edit-book.ejs', {book: foundBook})
+})
+
 module.exports = router
