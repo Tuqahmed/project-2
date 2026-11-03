@@ -31,4 +31,9 @@ router.post('/', isSignedIn, async (req,res)=>{
     res.redirect('/library')
 })
 
+router.get('/:bookId', async (req,res)=>{
+    const foundBook = await Book.findById(req.params.bookId).populate('owner author genre')
+    res.render('book-details.ejs', {book: foundBook})
+})
+
 module.exports = router
