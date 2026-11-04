@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genres</title>
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+
+    <h1>Genres</h1>
+
+    <% for(let oneGenre of genres){ %>
+        <h2><%= oneGenre.name %></h2>
+        <% for(let oneBook of books){ %>
+           <% if(oneBook.genre._id.equals(oneGenre._id)){ %>
+                <img src="<%= oneBook.coverImg %>" alt="<%= oneBook.title %>">
+                <p><%= oneBook.title %></p>
+           <% } %>
+        <% } %>
+    <% } %>
+</body>
+</html>
