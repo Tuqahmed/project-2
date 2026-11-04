@@ -33,6 +33,12 @@ router.get('/authors', async (req,res)=>{
     res.render('authors.ejs', {authors: allAuthors, books: allBooks})
 })
 
+router.get('/genres', async (req,res)=>{
+    const allBooks = await Book.find()
+    const allGenres = await Genre.find()
+    res.render('genres.ejs', {books: allBooks, genres: allGenres})
+})
+
 router.get('/:bookId', async (req,res)=>{
     const foundBook = await Book.findById(req.params.bookId).populate('owner author genre')
     res.render('book-details.ejs', {book: foundBook})
