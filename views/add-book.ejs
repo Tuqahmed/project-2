@@ -15,11 +15,18 @@
         <input name="title" id="title" type="text">
 
         <label for="author">Author:</label>
-        <input name="author" id="author" type="text">
+        <select name="author" id="author">
+            <% for(let oneAuthor of authors){ %>
+                <option value="<%= oneAuthor._id %>"><%= oneAuthor.name %></option>
+            <% } %>
+        </select>
 
         <label for="genre">Genre:</label>
-        <input name="genre" id="genre" type="text">
-
+       <select name="genre" id="genre">
+            <% for(let oneGenre of genres){ %>
+                <option value="<%= oneGenre._id %>"><%= oneGenre.name %></option>
+            <% } %>
+        </select>
         <label for="coverImg">Cover:</label>
         <input name="coverImg" id="coverImg" type="text">
 

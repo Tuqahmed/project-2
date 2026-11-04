@@ -15,11 +15,17 @@
         <input value="<%= book.title %>" name="title" id="title" type="text">
 
         <label for="author">Author:</label>
-        <input value="<%= book.author.name %>" name="author" id="author" type="text">
-
+        <select name="author" id="author">
+            <% for(let oneAuthor of authors){ %>
+                <option <% if(oneAuthor._id.equals(book.author._id)){ %> selected <% } %> value="<%= oneAuthor._id %>"><%= oneAuthor.name %></option>
+            <% } %>
+        </select>
         <label for="genre">Genre:</label>
-        <input value="<%= book.genre.name %>" name="genre" id="genre" type="text">
-
+        <select name="genre" id="genre">
+            <% for(let oneGenre of genres){ %>
+                <option <% if(oneGenre._id.equals(book.genre._id)){ %> selected <% } %> value="<%= oneGenre._id %>"><%= oneGenre.name %></option>
+            <% } %>
+        </select>
         <label for="coverImg">Cover:</label>
         <input value="<%= book.coverImg %>" name="coverImg" id="coverImg" type="text">
 

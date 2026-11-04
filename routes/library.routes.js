@@ -9,21 +9,17 @@ router.get('/', async (req,res)=>{
     res.render('library.ejs', {books: allBooks})
 })
 
-router.get('/new',isSignedIn, (req,res)=>{
-    res.render('add-book.ejs')
+router.get('/new',isSignedIn, async (req,res)=>{
+    const genres = await Genre.find()
+    const authors = await Author.find()
+    res.render('add-book.ejs', {genres, authors})
 })
 
 router.post('/', isSignedIn, async (req,res)=>{
-    const author = await Author.create({
-        name: req.body.author
-    })
-    const genre = await Genre.create({
-        name: req.body.genre
-    })
     const createdBook = await Book.create({
         title: req.body.title,
-        author: author._id,
-        genre: genre._id,
+        author: req.body.author,
+        genre: req.body.genre,
         coverImg: req.body.coverImg,
         publicationYear: req.body.publicationYear,
         owner: req.session.user._id
@@ -38,7 +34,21 @@ router.get('/:bookId', async (req,res)=>{
 
 router.get('/:bookId/edit', isSignedIn, async (req,res)=>{
     const foundBook = await Book.findById(req.params.bookId).populate('owner author genre')
-    res.render('edit-book.ejs', {book: foundBook})
+        const genres = await Genre.find()
+    const authors = await Author.find()
+
+    res.render('edit-book.ejs', {book: foundBook, genres, authors})
+})
+
+router.put('/:bookId', isSignedIn, async (req,res)=>{
+    const updatedBook = await Book.findByIdAndUpdate(req.params.bookId,{
+        title: req.body.title,
+        author: req.body.author,
+        genre: req.body.genre,
+        coverImg: req.body.coverImg,
+        publicationYear: req.body.publicationYear
+    })
+    res.redirect('/library')
 })
 
 module.exports = router
