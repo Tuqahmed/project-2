@@ -60,4 +60,9 @@ router.delete('/:bookId', isSignedIn, async (req,res)=>{
     res.redirect('/library')
 })
 
+router.get('/authors', async (req,res)=>{
+    const allAuthors = await Author.find()
+    res.render('authors.ejs', {authors: allAuthors})
+})
+
 module.exports = router
