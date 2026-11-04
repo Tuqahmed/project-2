@@ -51,4 +51,13 @@ router.put('/:bookId', isSignedIn, async (req,res)=>{
     res.redirect('/library')
 })
 
+router.delete('/:bookId', isSignedIn, async (req,res)=>{
+    const foundBook = await Book.findById(req.params.bookId)
+    if(!foundBook.owner.equals(req.session.user._id)){
+        return res.send('Action is not allowed')
+    }
+    await Book.findByIdAndDelete(req.params.bookId)
+    res.redirect('/library')
+})
+
 module.exports = router
