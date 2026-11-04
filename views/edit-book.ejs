@@ -4,35 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Book</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <%- include('./partials/navbar') %>
 
+    <main class="main">
     <h1>Edit the Book</h1>
 
-    <form action="/library/<%= book._id %>?_method=PUT" method="post">
-        <label for="title">Title:</label>
-        <input value="<%= book.title %>" name="title" id="title" type="text">
+    <form class="book-form" action="/library/<%= book._id %>?_method=PUT" method="post">
+        <div class="input-field">
+            <label for="title">Title:</label>
+            <input value="<%= book.title %>" name="title" id="title" type="text">
+        </div>
 
-        <label for="author">Author:</label>
-        <select name="author" id="author">
-            <% for(let oneAuthor of authors){ %>
-                <option <% if(oneAuthor._id.equals(book.author._id)){ %> selected <% } %> value="<%= oneAuthor._id %>"><%= oneAuthor.name %></option>
-            <% } %>
-        </select>
-        <label for="genre">Genre:</label>
-        <select name="genre" id="genre">
-            <% for(let oneGenre of genres){ %>
-                <option <% if(oneGenre._id.equals(book.genre._id)){ %> selected <% } %> value="<%= oneGenre._id %>"><%= oneGenre.name %></option>
-            <% } %>
-        </select>
-        <label for="coverImg">Cover:</label>
-        <input value="<%= book.coverImg %>" name="coverImg" id="coverImg" type="text">
+        <div class="input-field">
+            <label for="author">Author:</label>
+            <select name="author" id="author">
+                <% for(let oneAuthor of authors){ %>
+                    <option <% if(oneAuthor._id.equals(book.author._id)){ %> selected <% } %> value="<%= oneAuthor._id %>"><%= oneAuthor.name %></option>
+                <% } %>
+            </select>
+        </div>
 
-        <label for="publicationYear">Publication Year:</label>
-        <input value="<%= book.publicationYear %>" name="publicationYear" id="publicationYear" type="number">
+        <div class="input-field">
+            <label for="genre">Genre:</label>
+            <select name="genre" id="genre">
+                <% for(let oneGenre of genres){ %>
+                    <option <% if(oneGenre._id.equals(book.genre._id)){ %> selected <% } %> value="<%= oneGenre._id %>"><%= oneGenre.name %></option>
+                <% } %>
+            </select>
+        </div>
+
+        <div class="input-field">
+            <label for="coverImg">Cover:</label>
+            <input value="<%= book.coverImg %>" name="coverImg" id="coverImg" type="text">
+        </div>
+
+        <div class="input-field">
+            <label for="publicationYear">Publication Year:</label>
+            <input value="<%= book.publicationYear %>" name="publicationYear" id="publicationYear" type="number">
+        </div>
 
         <button>Update Book</button>
     </form>
+    </main>
 </body>
 </html>

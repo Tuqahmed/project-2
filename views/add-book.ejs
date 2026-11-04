@@ -4,36 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Book</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <%- include('./partials/navbar') %>
 
+    <main class="main">
     <h1>Add a Book</h1>
 
-    <form action="/library" method="post">
-        <label for="title">Title:</label>
-        <input name="title" id="title" type="text">
+    <form class="book-form" action="/library" method="post">
+        <div class="input-field">
+            <label for="title">Title:</label>
+            <input name="title" id="title" type="text">
+        </div>
 
-        <label for="author">Author:</label>
-        <select name="author" id="author">
-            <% for(let oneAuthor of authors){ %>
-                <option value="<%= oneAuthor._id %>"><%= oneAuthor.name %></option>
-            <% } %>
-        </select>
+        <div class="input-field">
+            <label for="author">Author:</label>
+            <select name="author" id="author">
+                <% for(let oneAuthor of authors){ %>
+                    <option value="<%= oneAuthor._id %>"><%= oneAuthor.name %></option>
+                <% } %>
+            </select>
+        </div>
 
-        <label for="genre">Genre:</label>
-       <select name="genre" id="genre">
-            <% for(let oneGenre of genres){ %>
-                <option value="<%= oneGenre._id %>"><%= oneGenre.name %></option>
-            <% } %>
-        </select>
-        <label for="coverImg">Cover:</label>
-        <input name="coverImg" id="coverImg" type="text">
+        <div class="input-field">
+            <label for="genre">Genre:</label>
+            <select name="genre" id="genre">
+                <% for(let oneGenre of genres){ %>
+                    <option value="<%= oneGenre._id %>"><%= oneGenre.name %></option>
+                <% } %>
+            </select>
+        </div>
+        
+        <div class="input-field">
+            <label for="coverImg">Cover:</label>
+            <input name="coverImg" id="coverImg" type="text">
+        </div>
 
-        <label for="publicationYear">Publication Year:</label>
-        <input name="publicationYear" id="publicationYear" type="number">
+        <div class="input-field">
+            <label for="publicationYear">Publication Year:</label>
+            <input name="publicationYear" id="publicationYear" type="number">
+        </div>
 
         <button>Add Book</button>
     </form>
+    </main>
 </body>
 </html>

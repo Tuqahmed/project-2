@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Details</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <%- include('./partials/navbar') %>
 
+    <main class="main book-details">
     <h1><%= book.title %></h1>
     <h2>By <%= book.author.name %></h2>
     <p>Genre: <%= book.genre.name %></p>
@@ -16,12 +18,13 @@
     <p>Book registered by <%= book.owner.username %></p>
 
     <% if(book.owner._id.equals(user._id)){ %>
-        <a href="/library/<%= book._id %>/edit">Edit Book</a>
+        <a class="btn" href="/library/<%= book._id %>/edit">Edit Book</a>
 
         <form action="/library/<%= book._id %>?_method=DELETE" method="post">
-            <button>Delete Book</button>
+            <button class="btn delete-btn">Delete Book</button>
         </form>
     <% } %>
+    </main>
 
 </body>
 </html>

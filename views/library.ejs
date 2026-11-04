@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <%- include('./partials/navbar') %>
 
-    <h1>The Library</h1>
+    <main class="main">
+        <h1>The Library</h1>
 
-    <% for(let oneBook of books){ %>
-        <a href="/library/<%= oneBook._id %>"><%= oneBook.title %> by <%= oneBook.author.name%></a>
-        <img src="<%= oneBook.coverImg %>" alt="<%= oneBook.title %>">
-    <% } %>
+        <div class="book-card">
+            <% for(let oneBook of books){ %>
+                <a class="book-title" href="/library/<%= oneBook._id %>">
+                    <img src="<%= oneBook.coverImg %>" alt="<%= oneBook.title %>">
+                    <h3><%= oneBook.title %></h3>
+                    <p><%= oneBook.author.name%></p>
+                </a>
+            <% } %>
+        </div>
+    </main>
 </body>
 </html>
