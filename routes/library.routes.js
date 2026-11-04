@@ -27,6 +27,12 @@ router.post('/', isSignedIn, async (req,res)=>{
     res.redirect('/library')
 })
 
+router.get('/authors', async (req,res)=>{
+    const allBooks = await Book.find()
+    const allAuthors = await Author.find()
+    res.render('authors.ejs', {authors: allAuthors, books: allBooks})
+})
+
 router.get('/:bookId', async (req,res)=>{
     const foundBook = await Book.findById(req.params.bookId).populate('owner author genre')
     res.render('book-details.ejs', {book: foundBook})
@@ -51,6 +57,7 @@ router.put('/:bookId', isSignedIn, async (req,res)=>{
     res.redirect('/library')
 })
 
+
 router.delete('/:bookId', isSignedIn, async (req,res)=>{
     const foundBook = await Book.findById(req.params.bookId)
     if(!foundBook.owner.equals(req.session.user._id)){
@@ -60,9 +67,5 @@ router.delete('/:bookId', isSignedIn, async (req,res)=>{
     res.redirect('/library')
 })
 
-router.get('/authors', async (req,res)=>{
-    const allAuthors = await Author.find()
-    res.render('authors.ejs', {authors: allAuthors})
-})
 
 module.exports = router

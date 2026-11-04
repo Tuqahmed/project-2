@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors</title>
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+
+    <h1>Authors</h1>
+
+    <% for(let oneAuthor of authors){ %>
+        <h2><%= oneAuthor.name %></h2>
+        <% for(let oneBook of books){ %>
+           <% if(oneBook.author._id.equals(oneAuthor._id)){ %>
+                <img src="<%= oneBook.coverImg %>" alt="<%= oneBook.title %>">
+                <p><%= oneBook.title %></p>
+           <% } %>
+        <% } %>
+    <% } %>
+</body>
+</html>
