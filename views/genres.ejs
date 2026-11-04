@@ -19,8 +19,10 @@
         <% for(let oneBook of books){ %>
            <% if(oneBook.genre._id.equals(oneGenre._id)){ %>
                 <div class="covers">
+                <a class="book-title" href="/library/<%= oneBook._id %>">
                 <img src="<%= oneBook.coverImg %>" alt="<%= oneBook.title %>">
                 <p><%= oneBook.title %></p>
+                </a>
                 </div>
            <% } %>
         <% } %>
