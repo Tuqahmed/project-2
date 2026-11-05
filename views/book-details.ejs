@@ -10,20 +10,20 @@
     <%- include('./partials/navbar') %>
 
     <main class="main book-details">
-    <h1><%= book.title %></h1>
-    <h2>By <%= book.author.name %></h2>
-    <p>Genre: <%= book.genre.name %></p>
-    <img src="<%= book.coverImg %>" alt="<%= book.title %>">
-    <p>Publication Year: <%= book.publicationYear %></p>
-    <p>Book registered by <%= book.owner.username %></p>
+        <h1><%= book.title %></h1>
+        <h2>By <%= book.author.name %></h2>
+        <p>Genre: <%= book.genre.name %></p>
+        <img src="<%= book.coverImg %>" alt="<%= book.title %>">
+        <p>Publication Year: <%= book.publicationYear %></p>
+        <p>Book registered by <%= book.owner.username %></p>
 
-    <% if(book.owner._id.equals(user._id)){ %>
-        <a class="btn" href="/library/<%= book._id %>/edit">Edit Book</a>
+        <% if(book.owner._id.equals(user._id)){ %>
+            <a class="btn" href="/library/<%= book._id %>/edit">Edit Book</a>
 
-        <form action="/library/<%= book._id %>?_method=DELETE" method="post">
-            <button class="btn delete-btn">Delete Book</button>
-        </form>
-    <% } %>
+            <form action="/library/<%= book._id %>?_method=DELETE" method="post">
+                <button class="btn delete-btn">Delete Book</button>
+            </form>
+        <% } %>
     </main>
 
 </body>

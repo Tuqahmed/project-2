@@ -10,25 +10,25 @@
     <%- include('./partials/navbar') %>
 
     <main class="main">
-    <h1>Genres</h1>
+        <h1>Genres</h1>
 
-    <% for(let oneGenre of genres){ %>
-        <section class="group">
-        <h2><%= oneGenre.name %></h2>
-        <div class="books">
-        <% for(let oneBook of books){ %>
-           <% if(oneBook.genre._id.equals(oneGenre._id)){ %>
-                <div class="covers">
-                <a class="book-title" href="/library/<%= oneBook._id %>">
-                <img src="<%= oneBook.coverImg %>" alt="<%= oneBook.title %>">
-                <p><%= oneBook.title %></p>
-                </a>
+        <% for(let oneGenre of genres){ %>
+            <section class="group">
+                <h2><%= oneGenre.name %></h2>
+                <div class="books">
+                    <% for(let oneBook of books){ %>
+                        <% if(oneBook.genre._id.equals(oneGenre._id)){ %>
+                                <div class="books">
+                                    <a class="book-title" href="/library/<%= oneBook._id %>">
+                                        <img src="<%= oneBook.coverImg %>" alt="<%= oneBook.title %>">
+                                        <p><%= oneBook.title %></p>
+                                    </a>
+                                </div>
+                        <% } %>
+                    <% } %>
                 </div>
-           <% } %>
+            </section>
         <% } %>
-        </div>
-        </section>
-    <% } %>
     </main>
 </body>
 </html>

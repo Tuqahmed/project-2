@@ -10,7 +10,27 @@
     <%- include('./partials/navbar') %>
 
     <main class="main">
-    <h1>Welcome to my Library Application</h1>
+        <% if (user){ %>
+            <h1>Welcome <%= user.username %></h1>
+
+            <h2>Your Books</h2>
+
+            <div class="books">
+                <% for(let oneBook of books){ %>
+                    <% if(oneBook.owner._id.equals(user._id)){ %>
+                    <a class="book-title" href="/library/<%= oneBook._id %>">
+                        <img src="<%= oneBook.coverImg %>" alt="<%= oneBook.title %>">
+                        <h3><%= oneBook.title %></h3>
+                        <p><%= oneBook.author.name%></p>
+                    </a>
+                    <% } %>
+                <% } %>
+            </div>
+        <% } else{ %>
+            <h1>Welcome to my Library Application</h1>
+
+        <% } %>
+
     </main>
     
 </body>
