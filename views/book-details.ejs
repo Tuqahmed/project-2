@@ -5,25 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Details</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Karla:ital,wght@0,200..800;1,200..800&family=Libre+Caslon+Condensed:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <%- include('./partials/navbar') %>
 
-    <main class="main book-details">
-        <h1><%= book.title %></h1>
-        <h2>By <%= book.author.name %></h2>
-        <p>Genre: <%= book.genre.name %></p>
-        <img src="<%= book.coverImg %>" alt="<%= book.title %>">
-        <p>Publication Year: <%= book.publicationYear %></p>
-        <p>Book registered by <%= book.owner.username %></p>
+    <main class="container">
+        <article class="book-details">
+            <img class="book-cover" src="<%= book.coverImg %>" alt="<%= book.title %>">
+            <div class="book-info">
+                <h1><%= book.title %></h1>
+                <p class="book-author">By <%= book.author.name %></p>
 
-        <% if(book.owner._id.equals(user._id)){ %>
-            <a class="btn" href="/library/<%= book._id %>/edit">Edit Book</a>
+                <div class="book-meta">
+                    <span class="chip"><%= book.genre.name %></span>
+                    <span class="chip"><%= book.publicationYear %></span>
+                </div>
 
-            <form action="/library/<%= book._id %>?_method=DELETE" method="post">
-                <button class="btn delete-btn">Delete Book</button>
-            </form>
-        <% } %>
+                <p class="registered">Registered by <%= book.owner.username %></p>
+
+                <% if(book.owner._id.equals(user._id)){ %>
+                    <div class="book-actions">
+                        <a class="btn" href="/library/<%= book._id %>/edit">Edit Book</a>
+
+                        <form action="/library/<%= book._id %>?_method=DELETE" method="post">
+                            <button class="btn delete-btn">Delete Book</button>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+        </article>
     </main>
 
 </body>
