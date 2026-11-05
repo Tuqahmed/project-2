@@ -47,6 +47,11 @@
                 <input value="<%= book.publicationYear %>" name="publicationYear" id="publicationYear" type="number">
             </div>
 
+            <div class="field">
+                <label for="review">Book Review:</label>
+                <textarea name="review" id="review" rows="5"><%= book.review %></textarea>
+            </div>
+
             <button>Update Book</button>
         </form>
     </main>

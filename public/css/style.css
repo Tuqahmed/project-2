@@ -315,3 +315,36 @@ h2{
 .add-book:hover{
     transform: scale(1.08);
 }
+
+.field textarea{
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font: inherit;
+    background-color: var(--background);
+    resize: vertical;
+}
+
+.field textarea:focus{
+    outline: none;
+    border-color: var(--lilac);
+    box-shadow: 0 0 0 3px var(--lilac-soft);
+}
+
+.review{
+    margin-top: 32px;
+    padding: 28px 32px;
+    border-left: 4px solid var(--lilac);
+}
+
+.review h2{
+    margin: 0 0 12px;
+    font-size: 22px;
+}
+
+.review p{
+    margin: 0 0 16px;
+    font-size: 17px;
+    line-height: 1.8;
+    white-space: pre-line;
+}

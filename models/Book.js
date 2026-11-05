@@ -21,6 +21,10 @@ const bookSchema = new mongoose.Schema({
     publicationYear: {
         type: Number
     },
+    review: {
+        type: String,
+        trim: true
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

@@ -22,6 +22,7 @@ router.post('/', isSignedIn, async (req,res)=>{
         genre: req.body.genre,
         coverImg: req.body.coverImg,
         publicationYear: req.body.publicationYear,
+        review: req.body.review,
         owner: req.session.user._id
     })
     res.redirect('/library')
@@ -58,7 +59,8 @@ router.put('/:bookId', isSignedIn, async (req,res)=>{
         author: req.body.author,
         genre: req.body.genre,
         coverImg: req.body.coverImg,
-        publicationYear: req.body.publicationYear
+        publicationYear: req.body.publicationYear,
+        review: req.body.review
     })
     res.redirect('/library')
 })
