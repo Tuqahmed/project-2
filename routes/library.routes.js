@@ -3,6 +3,8 @@ const Book = require('../models/Book')
 const router = require('express').Router()
 const Author = require('../models/Author')
 const Genre = require('../models/Genre')
+const Status = require('../models/Status')
+const Rating = require('../models/Rating')
 
 router.get('/', async (req,res)=>{
     const filter = {}
@@ -14,7 +16,9 @@ router.get('/', async (req,res)=>{
 router.get('/new',isSignedIn, async (req,res)=>{
     const genres = await Genre.find()
     const authors = await Author.find()
-    res.render('add-book.ejs', {genres, authors})
+    const statuses = await Status.find()
+    const ratings = await Rating.find()
+    res.render('add-book.ejs', {genres, authors, statuses, ratings})
 })
 
 router.post('/', isSignedIn, async (req,res)=>{
@@ -24,6 +28,8 @@ router.post('/', isSignedIn, async (req,res)=>{
         genre: req.body.genre,
         coverImg: req.body.coverImg,
         publicationYear: req.body.publicationYear,
+        status: req.body.status,
+        rating: req.body.rating,
         review: req.body.review,
         owner: req.session.user._id
     })
@@ -47,16 +53,18 @@ router.get('/genres', async (req,res)=>{
 })
 
 router.get('/:bookId', async (req,res)=>{
-    const foundBook = await Book.findById(req.params.bookId).populate('owner author genre')
+    const foundBook = await Book.findById(req.params.bookId).populate('owner author genre status rating')
     res.render('book-details.ejs', {book: foundBook})
 })
 
 router.get('/:bookId/edit', isSignedIn, async (req,res)=>{
-    const foundBook = await Book.findById(req.params.bookId).populate('owner author genre')
-        const genres = await Genre.find()
+    const foundBook = await Book.findById(req.params.bookId).populate('owner author genre status rating')
+    const genres = await Genre.find()
     const authors = await Author.find()
+    const status = await Status.find()
+    const ratings = await Rating.find()
 
-    res.render('edit-book.ejs', {book: foundBook, genres, authors})
+    res.render('edit-book.ejs', {book: foundBook, genres, authors, status, ratings})
 })
 
 router.put('/:bookId', isSignedIn, async (req,res)=>{
@@ -66,6 +74,8 @@ router.put('/:bookId', isSignedIn, async (req,res)=>{
         genre: req.body.genre,
         coverImg: req.body.coverImg,
         publicationYear: req.body.publicationYear,
+        status: req.body.status,
+        rating: req.body.rating,
         review: req.body.review
     })
     req.session.toast = {

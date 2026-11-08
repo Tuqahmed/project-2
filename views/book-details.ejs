@@ -20,7 +20,17 @@
                 <div class="book-meta">
                     <span class="chip"><%= book.genre.name %></span>
                     <span class="chip"><%= book.publicationYear %></span>
+
+                    <% if(book.status){ %>
+                        <span class="chip chip-status"><%= book.status.name %></span>
+                    <% } %>
                 </div>
+                
+                <% if(book.rating){ %>
+                    <div class="rating" aria-label="Rating: <%= book.rating.name %>">
+                        <span class="stars"><%= book.rating.name %></span>
+                    </div>
+                <% } %>
 
                 <% if(book.review){ %>
                     <section class="review">
@@ -33,7 +43,6 @@
 
                 <% if(book.owner._id.equals(user._id)){ %>
                     <div class="book-actions">
-                        <!-- <a class="btn" href="/library/<%= book._id %>/edit">Edit Book</a> -->
 
                         <button type="button" class="btn" popovertarget="edit-popover">Edit Book</button>
 
@@ -79,6 +88,24 @@
                             <div class="field">
                                 <label for="edit-year">Publication Year:</label>
                                 <input value="<%= book.publicationYear %>" id="edit-year" name="publicationYear" type="number">
+                            </div>
+
+                            <div class="field">
+                                <label for="status">Status:</label>
+                                <select id="status" name="status">
+                                    <% for(let oneStatus of statuses){ %>
+                                        <option <% if(book.status && oneStatus._id.equals(book.status._id)){ %> selected <% } %> value="<%= oneStatus._id %>"><%= oneStatus.name %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="rating">Rating:</label>
+                                <select id="rating" name="rating">
+                                    <% for(let oneRating of ratings){ %>
+                                        <option <% if(book.rating && oneRating._id.equals(book.rating._id)){ %> selected <% } %> value="<%= oneRating._id %>"><%= oneRating.name %></option>
+                                    <% } %>
+                                </select>
                             </div>
 
                             <div class="field">

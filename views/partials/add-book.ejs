@@ -12,6 +12,7 @@
         <div class="field">
             <label for="add-author">Author:</label>
             <select id="add-author" name="author">
+                <option value="">Choose an author...</option>
                 <% for(let oneAuthor of authors){ %>
                     <option value="<%= oneAuthor._id %>"><%= oneAuthor.name %></option>
                 <% } %>
@@ -21,6 +22,7 @@
         <div class="field">
             <label for="add-genre">Genre:</label>
             <select id="add-genre" name="genre">
+                <option value="">Choose a genre...</option>
                 <% for(let oneGenre of genres){ %>
                     <option value="<%= oneGenre._id %>"><%= oneGenre.name %></option>
                 <% } %>
@@ -35,6 +37,26 @@
         <div class="field">
             <label for="add-year">Publication Year:</label>
             <input id="add-year" name="publicationYear" type="number">
+        </div>
+
+        <div class="field">
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="">Choose the status...</option>
+                <% for(let oneStatus of statuses){ %>
+                    <option value="<%= oneStatus._id %>"><%= oneStatus.name %></option>
+                <% } %>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating">
+                <option value="">Choose your rating...</option>
+                <% for(let oneRating of ratings){ %>
+                    <option value="<%= oneRating._id %>"><%= oneRating.name %></option>
+                <% } %>
+            </select>
         </div>
 
         <div class="field">

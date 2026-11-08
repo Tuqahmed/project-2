@@ -13,13 +13,21 @@ const bookSchema = new mongoose.Schema({
     },
     genre: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Genre',
+        ref: 'Genre'
     },
     coverImg: {
         type: String
     },
     publicationYear: {
         type: Number
+    },
+    status:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Status'
+    },
+    rating:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Rating'
     },
     review: {
         type: String,

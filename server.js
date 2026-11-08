@@ -17,7 +17,9 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 // routes Imports
 const authController = require("./routes/auth.routes.js");
 const indexController = require("./routes/index.routes.js");
-const libraryRoutes = require('./routes/library.routes.js')
+const libraryRoutes = require('./routes/library.routes.js');
+const Status = require("./models/Status.js");
+const Rating = require('./models/Rating.js')
 
 
 // Middleware
@@ -48,9 +50,12 @@ app.use((req,res,next)=>{
   delete req.session.toast
   next()
 })
+
 app.use(async (req,res,next)=>{
   res.locals.authors = await Author.find()
   res.locals.genres = await Genre.find()
+  res.locals.statuses = await Status.find()
+  res.locals.ratings = await Rating.find()
   next()
 })
 

@@ -529,3 +529,20 @@ h2{
         transform: none;
     }
 }
+
+.chip-status{
+    background-color: var(--lilac-dark);
+    color: #ffffff;
+}
+
+.rating{
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.rating .stars{
+    color: #e0a82e;
+    font-size: 21px;
+    letter-spacing: 3px;
+}
