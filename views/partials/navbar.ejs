@@ -1,21 +1,33 @@
 <nav class="navbar">
     
-    <a class="nav-link" href="/">Homepage</a>
-    <a class="nav-link" href="/library">Library</a>
-    <a class="nav-link" href="/library/authors">Authors</a>
-    <a class="nav-link" href="/library/genres">Genres</a>
-    <% if (user){ %>
-    <a class="nav-link" href="/auth/sign-out">Logout</a>
+    <a class="home" href="/">Homepage</a>
+    <div class="nav-links">
+        <a href="/library">Library</a>
+        <a href="/library/authors">Authors</a>
+        <a href="/library/genres">Genres</a>
+    </div>
 
-    <% } else{ %>
-    <a class="nav-link" href="/auth/sign-up">Sign up</a>
-    <a class="nav-link" href="/auth/sign-in">Login</a>
+    <div class="nav-auth">
+        <% if (user){ %>
+            <a class="nav-link" href="/auth/sign-out">Logout</a>
 
-    <% } %>
+        <% } else{ %>
+            <a href="/auth/sign-in">Login</a>
+            <a class="nav-su" href="/auth/sign-up">Sign up</a>
+
+        <% } %>
+    </div>
 
     
 </nav>
 
 <% if(user){ %>
     <a class="add-book" href="/library/new">+</a>
+<% } %>
+
+
+<% if (typeof toast !== 'undefined' && toast){ %>
+    <div class="toast toast-<%= toast.type %>" role="status">
+        <%= toast.message %>
+    </div>
 <% } %>

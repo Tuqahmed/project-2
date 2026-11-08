@@ -13,6 +13,15 @@
     <main class="container">
         <h1>The Library</h1>
 
+        <form class="search-bar" action="/library" method="get">
+            <input placeholder="Search by title..." name="search" type="text">
+            <button>🔍︎</button>
+        </form>
+
+        <% if(books.length === 0){ %>
+            <p class="empty">No books found.</p>
+        <% } %>
+
         <div class="book-grid">
             <% for(let oneBook of books){ %>
                 <a class="book-card" href="/library/<%= oneBook._id %>">

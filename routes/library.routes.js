@@ -5,7 +5,9 @@ const Author = require('../models/Author')
 const Genre = require('../models/Genre')
 
 router.get('/', async (req,res)=>{
-    const allBooks = await Book.find().populate('owner author')
+    const filter = {}
+    if(req.query.search) filter.title = {$regex: req.query.search, $options: 'i'}
+    const allBooks = await Book.find(filter).populate('owner author')
     res.render('library.ejs', {books: allBooks})
 })
 
@@ -25,6 +27,10 @@ router.post('/', isSignedIn, async (req,res)=>{
         review: req.body.review,
         owner: req.session.user._id
     })
+    req.session.toast = {
+        type: 'success',
+        message: 'Book added'
+    }
     res.redirect('/library')
 })
 
@@ -62,6 +68,10 @@ router.put('/:bookId', isSignedIn, async (req,res)=>{
         publicationYear: req.body.publicationYear,
         review: req.body.review
     })
+    req.session.toast = {
+        type: 'success',
+        message: 'Book updated'
+    }
     res.redirect('/library')
 })
 
@@ -72,7 +82,15 @@ router.delete('/:bookId', isSignedIn, async (req,res)=>{
         return res.send('Action is not allowed')
     }
     await Book.findByIdAndDelete(req.params.bookId)
+    req.session.toast = {
+        type: 'success',
+        message: 'Book deleted'
+    }
     res.redirect('/library')
+})
+
+router.get('/', async(req,res)=>{
+    const searchedBook = await Book.find(req.params.search)
 })
 
 
