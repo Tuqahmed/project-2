@@ -22,7 +22,8 @@
 </nav>
 
 <% if(user){ %>
-    <a class="add-book" href="/library/new">+</a>
+    <button class="add-book" popovertarget="add-popover" aria-label="Add a Book">+</button>
+    <%- include('./add-book') %>
 <% } %>
 
 

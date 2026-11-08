@@ -7,6 +7,8 @@ const session = require('express-session');
 const methodOverride = require('method-override')
 const {MongoStore} = require("connect-mongo");
 const connectToDB = require('./db.js')
+const Author = require('./models/Author.js')
+const Genre = require('./models/Genre.js')
 
 // middleware imports
 const isSignedIn = require("./middleware/is-signed-in.js");
@@ -44,6 +46,11 @@ app.use(passUserToView)
 app.use((req,res,next)=>{
   res.locals.toast = req.session.toast
   delete req.session.toast
+  next()
+})
+app.use(async (req,res,next)=>{
+  res.locals.authors = await Author.find()
+  res.locals.genres = await Genre.find()
   next()
 })
 

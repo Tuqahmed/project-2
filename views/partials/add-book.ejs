@@ -1,0 +1,47 @@
+<div id="add-popover" popover>
+    <button type="button" class="dialog-close" popovertarget="add-popover" popovertargetaction="hide" aria-label="Close">×</button>
+
+    <form class="book-form" action="/library" method="post">
+        <h2>Add a Book</h2>
+
+        <div class="field">
+            <label for="add-title">Title:</label>
+            <input id="add-title" name="title" type="text">
+        </div>
+
+        <div class="field">
+            <label for="add-author">Author:</label>
+            <select id="add-author" name="author">
+                <% for(let oneAuthor of authors){ %>
+                    <option value="<%= oneAuthor._id %>"><%= oneAuthor.name %></option>
+                <% } %>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="add-genre">Genre:</label>
+            <select id="add-genre" name="genre">
+                <% for(let oneGenre of genres){ %>
+                    <option value="<%= oneGenre._id %>"><%= oneGenre.name %></option>
+                <% } %>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="add-coverImg">Cover:</label>
+            <input id="add-coverImg" name="coverImg" type="text">
+        </div>
+
+        <div class="field">
+            <label for="add-year">Publication Year:</label>
+            <input id="add-year" name="publicationYear" type="number">
+        </div>
+
+        <div class="field">
+            <label for="add-review">Review:</label>
+            <textarea id="add-review" name="review" rows="4"></textarea>
+        </div>
+
+        <button>Add Book</button>
+    </form>
+</div>

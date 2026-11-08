@@ -33,12 +33,62 @@
 
                 <% if(book.owner._id.equals(user._id)){ %>
                     <div class="book-actions">
-                        <a class="btn" href="/library/<%= book._id %>/edit">Edit Book</a>
+                        <!-- <a class="btn" href="/library/<%= book._id %>/edit">Edit Book</a> -->
+
+                        <button type="button" class="btn" popovertarget="edit-popover">Edit Book</button>
 
                         <form action="/library/<%= book._id %>?_method=DELETE" method="post">
                             <button class="btn delete-btn">Delete Book</button>
                         </form>
                     </div>
+
+                    <div id="edit-popover" popover>
+                        <button type="button" class="dialog-close" popovertarget="edit-popover" popovertargetaction="hide" aria-label="Close">×</button>
+
+                        <form class="book-form" action="/library/<%= book._id %>?_method=PUT" method="post">
+                            <h2>Edit the Book</h2>
+
+                            <div class="field">
+                                <label for="edit-title">Title:</label>
+                                <input value="<%= book.title %>" id="edit-title" name="title" type="text">
+                            </div>
+
+                            <div class="field">
+                                <label for="edit-author">Author:</label>
+                                <select id="edit-author" name="author">
+                                    <% for(let oneAuthor of authors){ %>
+                                        <option <% if(oneAuthor._id.equals(book.author._id)){ %> selected <% } %> value="<%= oneAuthor._id %>"><%= oneAuthor.name %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="edit-genre">Genre:</label>
+                                <select id="edit-genre" name="genre">
+                                    <% for(let oneGenre of genres){ %>
+                                        <option <% if(oneGenre._id.equals(book.genre._id)){ %> selected <% } %> value="<%= oneGenre._id %>"><%= oneGenre.name %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="edit-coverImg">Cover:</label>
+                                <input value="<%= book.coverImg %>" id="edit-coverImg" name="coverImg" type="text">
+                            </div>
+
+                            <div class="field">
+                                <label for="edit-year">Publication Year:</label>
+                                <input value="<%= book.publicationYear %>" id="edit-year" name="publicationYear" type="number">
+                            </div>
+
+                            <div class="field">
+                                <label for="edit-review">Review:</label>
+                                <textarea id="edit-review" name="review" rows="4"><%= book.review %></textarea>
+                            </div>
+
+                            <button>Update Book</button>
+                        </form>
+                    </dialog>
                 <% } %>
             </div>
         </article>
