@@ -1,7 +1,6 @@
-// imports
-const express = require("express") //importing express package
-const app = express() // creates a express application
-const dotenv = require("dotenv").config() //this allows me to use my .env values in this file
+const express = require("express") 
+const app = express() 
+const dotenv = require("dotenv").config() 
 const morgan = require('morgan')
 const session = require('express-session');
 const methodOverride = require('method-override')
@@ -11,11 +10,9 @@ const Author = require('./models/Author.js')
 const Genre = require('./models/Genre.js')
 const User = require('./models/User.js')
 
-// middleware imports
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 
-// routes Imports
 const authController = require("./routes/auth.routes.js");
 const indexController = require("./routes/index.routes.js");
 const libraryRoutes = require('./routes/library.routes.js');
@@ -24,8 +21,7 @@ const Rating = require('./models/Rating.js');
 const Book = require("./models/Book.js");
 
 
-// Middleware
-app.use(express.static('public')) // my app will serve all static files from public folder
+app.use(express.static('public')) 
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'))
 app.use(methodOverride('_method'))
@@ -42,7 +38,7 @@ app.use(
 
     cookie: {
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 // 1 day
+      maxAge: 1000 * 60 * 60 * 24 
     }
   })
 );
@@ -71,7 +67,6 @@ app.use(async (req,res,next)=>{
 
 
 
-// Routes go here
 app.use('/auth',authController)
 app.use('/', indexController)
 app.use('/library', libraryRoutes)
@@ -100,7 +95,6 @@ app.put('/users/:userId', isSignedIn, async (req,res)=>{
 
 
 
-// connect to database and listen on Port 3000
 async function startServer() {
     const PORT = process.env.PORT || 3000;
     await connectToDB();

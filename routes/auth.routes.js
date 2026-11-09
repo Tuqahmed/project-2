@@ -4,7 +4,6 @@ const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
 
 
-// Sign up routes
 router.get("/sign-up", (req, res) => {
   try{
   res.render("auth/sign-up.ejs");
@@ -32,7 +31,6 @@ router.post("/sign-up", async (req, res) => {
   const hashedPassword = bcrypt.hashSync(req.body.password, 10);
   req.body.password = hashedPassword;
 
-  // validation logic
 
   const user = await User.create(req.body);
   res.redirect("/auth/sign-in");
@@ -48,7 +46,6 @@ router.post("/sign-up", async (req, res) => {
 
 
 
-// Sign in routes
 router.get("/sign-in", (req, res) => {
   try{
   res.render("auth/sign-in.ejs");
