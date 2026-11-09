@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= foundUser.username %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+
+    <main class="container">
+        <section class="profile-header">
+            <img class="profilePicture" src="<%= foundUser.profilePicture %>" alt="<%= foundUser.username %>">
+
+            <div class="profile-info">
+                <h1><%= foundUser.username %></h1>
+                <p class="profile-about"><%= foundUser.about || 'No bio yet.' %></p>
+                <p class="profile-count"><%= books.length %> books added</p>
+
+                <% if(foundUser._id.equals(user._id)){ %>
+                    <button type="button" class="btn" popovertarget="profile-popover">Edit Profile</button>
+                <% } %>
+            </div>
+        </section>
+
+        <h2>Books added</h2>
+        <% if(books.length === 0){ %>
+            <p class="empty">No books yet.</p>
+        <% }else{ %>
+            <div class="book-grid">
+                <% for(let book of books){ %>
+                    <a class="book-card" href="/library/<%= book._id %>">
+                        <img src="<%= book.coverImg %>" alt="<%= book.title %>">
+                        <h3><%= book.title %></h3>
+                        <p><%= book.author.name %></p>
+                    </a>
+                <% } %>
+            </div>
+        <% } %>
+    </main>
+
+    <% if(foundUser._id.equals(user._id)){ %>
+        <div id="profile-popover" popover>
+            <button type="button" class="dialog-close" popovertarget="profile-popover" popovertargetaction="hide" aria-label="Close">×</button>
+
+            <form class="book-form" action="/users/<%= foundUser._id %>?_method=PUT" method="post">
+                <h2>Edit Profile</h2>
+
+                <div class="field">
+                    <label for="profilePicture">Picture URL:</label>
+                    <input value="<%= foundUser.profilePicture %>" name="profilePicture" id="profilePicture" type="text">
+                </div>
+
+                <div class="field">
+                    <label for="about">About you:</label>
+                    <textarea name="about" id="about" rows="4" maxlength="300"><%= foundUser.about %></textarea>
+                </div>
+
+                <button>Save</button>
+            </form>
+        </div>
+    <% } %>
+</body>
+</html>

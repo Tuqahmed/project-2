@@ -39,7 +39,7 @@
                     </section>
                 <% } %>
 
-                <p class="registered">Registered by <%= book.owner.username %></p>
+                <p class="registered">Registered by <a href="/users/<%= book.owner._id %>"><%= book.owner.username %></a></p>
 
                 <% if(book.owner._id.equals(user._id)){ %>
                     <div class="book-actions">
