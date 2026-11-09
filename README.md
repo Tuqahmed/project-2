@@ -52,7 +52,7 @@ npm i
 - As a user, I want to see a display of all genres.
 
 ## Database Design
-![ERD](Library.png)
+![ERD](library.png)
 
 ## Routes
 | Method | Route                        | Description                         |
