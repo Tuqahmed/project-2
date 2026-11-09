@@ -41,7 +41,7 @@
 
                 <p class="registered">Registered by <a href="/users/<%= book.owner._id %>"><%= book.owner.username %></a></p>
 
-                <% if(book.owner._id.equals(user._id)){ %>
+                <% if(user && book.owner && String(book.owner._id) === String(user._id)){ %>
                     <div class="book-actions">
 
                         <button type="button" class="btn" popovertarget="edit-popover">Edit Book</button>
@@ -119,6 +119,36 @@
                 <% } %>
             </div>
         </article>
+
+        <section class="comments">
+            <h2>Comments (<%= book.comments.length %>)</h2>
+
+            <% if(user){ %>
+                <form class="comment-form" action="/library/<%= book._id %>/comments" method="post">
+                    <div class="field">
+                        <textarea name="content" id="name" rows="3" maxlength="500" placeholder="Share your thoughts..." required></textarea>
+                    </div>
+                    <button class="btn">Post Comment</button>
+                </form>
+            <% }else{ %>
+                <p class="empty"><a href="/auth/sign-in">Log in</a> to leave a comment.</p>
+            <% } %>
+
+            <% for(let comment of book.comments.slice().reverse()){ %>
+                <div class="comment">
+                    <div class="comment-picture">
+                        <a href="/users/<%= comment.author._id %>"><img src="<%= comment.author.profilePicture %>" alt=""></a>
+                    </div>
+
+                    <div class="comment-body">
+                        <div class="comment-head">
+                            <a href="/users/<%= comment.author._id %>"><%= comment.author.username %></a>
+                        </div>
+                        <p><%= comment.content %></p>
+                    </div>
+                </div>
+            <% } %>
+        </section>
     </main>
 
 </body>
